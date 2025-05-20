@@ -187,7 +187,7 @@ const Character = () => {
 
               {/* Avatar Virtual Placeholder */}
               <div className="w-20 h-20 bg-gray-800/50 rounded-md flex items-center justify-center mb-2">
-                <img src="public\images\VIKI.png" alt="VIKI-IMG" />
+                <img src="/images/VIKI.png" alt="VIKI-IMG" />
               </div>
               {/* Star Rating */}
               <div className="flex">
@@ -213,7 +213,7 @@ const Character = () => {
 
               {/* Avatar Virtual Placeholder */}
               <div className="w-20 h-20 bg-gray-800/50 rounded-md flex items-center justify-center mb-2">
-                <img src="public\images\EVA.png" alt="EVA-IMG" />
+                <img src="/images/EVA.png" alt="EVA-IMG" />
               </div>
               {/* Star Rating */}
               <div className="flex">
@@ -246,7 +246,7 @@ const Character = () => {
                 exit={{ x: "-100%" }}
                 transition={{ duration: 0.5 }}
               >
-                <img src="public\images\VIKI.png" alt="" />
+                <img src="/images/VIKI.png" alt="" />
               </motion.div>
             ) : (
               <motion.div
