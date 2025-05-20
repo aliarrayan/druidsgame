@@ -3,14 +3,14 @@ import React from "react";
 const Hero = () => {
   return (
     <main className="relative w-full h-screen overflow-hidden flex justify-center mb-[10%]">
-      <img
-        src="/images/background.png"
+      <video
+        src="/videos/hero.mp4"
         autoPlay
         loop
         muted
         playsInline
         className="w-full h-[95%] object0civer absolute top-0 first-letter:left-0 -z-10"
-      ></img>
+      ></video>
 
       <div className="absolute bottom-[15%] flex flex-col items-center gap-5">
         <img
