@@ -3,61 +3,49 @@ import { Star } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Spline from "@splinetool/react-spline";
 
-// The customCursor component to accep isHovering3D as a prop
-function CustomCursor({ isHovering3D }){
-    const [position, setPosition] = useState({ x: 0, y: 0})
-    const cursorRef =useRef(null)
+function CustomCursor() {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const cursorRef = useRef(null);
 
-    useEffect(() => {
-        const handleMouseMove =(e) => {
-            setPosition({ x:e.clientX, y: e.clientY })
-        }
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+    };
 
-        document.addEventListener("mousemove", handleMouseMove)
-        return () => {
-            document.removeEventListener("mousemove", handleMouseMove)
-        }
-    })
+    document.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
-    return (
-        <motion.div
-        ref={cursorRef}
-        className="fixed top-0 lef-0 z-50 pointer-events-none mix-blend-difference"
-        animate={{
-            x: position.x - (isHovering3D ? 12 :15),
-            y: position.y - (isHovering3D ? 12 :15),
-            scale: isHovering3D ? 1.5 : 1.
-        }}
-        transition={{
-            type: "spring",
-            stiffness: 500,
-            damping: 28,
-            mass: 0.5,
-        }}
-        >
-            <motion.div 
-            className={`rounded-full ${isHovering3D ? "bg-violet-500" : "bg-white"}`}
-            animate={{
-                width: isHovering3D ? "24px" : "40px",
-                height: isHovering3D ? "24px" : "40px",
-            }}
-            transition={{ duration: 0.2 }}
-            />
-            {isHovering3D && (
-                <motion.div
-                className="absolute inset-0 rounded-full bg-transition border-violet-500"
-                initial = {{ scale: 0.5, opacity: 0 }}
-                animate = {{ scale: 2, opacity: 0.5 }}
-                transition={{ duration:1, repeat: Number.POSITIVE_INFINITY }}
-                />
-            )}
-        </motion.div>
-    )
+  return (
+    <motion.div
+      ref={cursorRef}
+      className="fixed top-0 left-0 z-50 pointer-events-none mix-blend-difference"
+      animate={{
+        x: position.x - 15,
+        y: position.y - 15,
+        scale: 1,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 500,
+        damping: 28,
+        mass: 0.5,
+      }}
+    >
+      <motion.div
+        className="rounded-full bg-white"
+        animate={{ width: "40px", height: "40px" }}
+        transition={{ duration: 0.2 }}
+      />
+    </motion.div>
+  );
 }
+
 const Character = () => {
   // Track which Avatar is Selected
   const [selectedAvatar, setSelectedAvatar] = useState("VIKI");
-  const [cursorInModelArea, setCursorInModelArea] = useState(false)
 
   // simplfied Avatar Data
   const Avatar = {
@@ -82,17 +70,8 @@ const Character = () => {
   // Get current Avatar Data
   const currenAvatar = Avatar[selectedAvatar];
 
-  const handle3DAreMouseEnter = () =>{
-    setCursorInModelArea(true)
-  }
-
-  const handle3DAreMouseLeave = () =>{
-    setCursorInModelArea(true)
-  }
-
   return (
     <div className="relative w-full h-screen overflow-hidden mb-[10%]">
-        < CustomCursor isHovering3D={cursorInModelArea}/>
       {/* Section Title*/}
       <div className="relative z-10 pt-6 text-center">
         <h1
@@ -233,9 +212,7 @@ const Character = () => {
         </div>
 
         {/* Right Side - 3D Model */}
-        <div className="relative md:w-2/4 w-full md:h-full h-80 flex items-center justify-center overflow-hidden"
-        onMouseEnter={handle3DAreMouseEnter}
-        onMouseLeave={handle3DAreMouseLeave}>
+        <div className="relative md:w-2/4 w-full md:h-full h-80 flex items-center justify-center overflow-hidden">
           <AnimatePresence mode="wait">
             {selectedAvatar == "VIKI" ? (
               <motion.div
